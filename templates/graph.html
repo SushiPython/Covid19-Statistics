@@ -1,0 +1,95 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://flexstyle.sushipython.repl.co/light-flexstyle.css">
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Global Covid Data</title>
+</head>
+<body>
+  <div class="chart-container">
+  <canvas id="line-chartcanvas"></canvas>
+</div>
+  <div class="chart-container">
+    <canvas id="line-chartcanvas"></canvas>
+  </div>
+
+  <!-- javascript -->
+</body>
+</html>
+<style>
+  .chart-container {
+  width: 80%;
+  height: 480px;
+  margin: 0 auto;
+}
+</style>
+<script>
+$(function(){
+
+  //get the line chart canvas
+  var ctx = $("#line-chartcanvas");
+
+  //line chart data
+  var data = {
+    labels: ['10', '9', '8', '7', '6', '5', '4', '3', '2', '1'],
+    datasets: [
+      {
+        label: "Deaths",
+        data: {{deaths}},
+        backgroundColor: "blue",
+        borderColor: "lightblue",
+        fill: false,
+        lineTension: 0,
+        radius: 5
+      },
+      {
+        label: "Cases",
+        data: {{cases}},
+        backgroundColor: "green",
+        borderColor: "lightgreen",
+        fill: false,
+        lineTension: 0,
+        radius: 5
+      },
+      {
+        label: "Recoveries",
+        data: {{recovered}},
+        backgroundColor: "red",
+        borderColor: "pink",
+        fill: false,
+        lineTension: 0,
+        radius: 5
+      }
+    ]
+  };
+
+  //options
+  var options = {
+    responsive: true,
+    title: {
+      display: true,
+      position: "top",
+      text: "Global Covid Timeline",
+      fontSize: 18,
+      fontColor: "#111"
+    },
+    legend: {
+      display: true,
+      position: "bottom",
+      labels: {
+        fontColor: "#333",
+        fontSize: 16
+      }
+    }
+  };
+
+  //create Chart class object
+  var chart = new Chart(ctx, {
+    type: "line",
+    data: data,
+    options: options
+  });
+});
+</script>
